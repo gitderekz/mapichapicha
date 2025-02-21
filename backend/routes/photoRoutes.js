@@ -6,7 +6,7 @@ const uploadMiddleware = require('../middleware/uploadMiddleware');
 const router = express.Router();
 
 router.post('/upload', authenticate, authorize(['publisher']), uploadMiddleware, photoController.uploadPhotos);
-// router.get('/', photoController.getPhotos);
+router.get('/client', photoController.getClientPhotos);
 router.get('/', photoController.getCategoryPhotos);
 router.get('/sponsor', photoController.getSponsorPhotos);
 router.get('/home', photoController.getHomePhotos);

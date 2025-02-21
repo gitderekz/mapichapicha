@@ -1,5 +1,5 @@
 // module.exports = (sequelize, DataTypes) => {
-//     const Photo = sequelize.define('photo', {
+//     const photo = sequelize.define('photo', {
 //       name: DataTypes.STRING,
 //       category: DataTypes.STRING,
 //       event: DataTypes.STRING,
@@ -8,15 +8,31 @@
 //       imageUrl: DataTypes.STRING,
 //       likes: DataTypes.INTEGER,
 //     });
-//     return Photo;
+//     return photo;
 //   };
-  // models/Photo.js
+  // models/photo.js
 module.exports = (sequelize, DataTypes) => {
-    const Photo = sequelize.define('Photo', {
+    const photo = sequelize.define('photo', {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+      },
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'users', // References the users table
+          key: 'id',
+        },
+      },
+      clientId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'users', // References the users table
+          key: 'id',
+        },
       },
       name: {
         type: DataTypes.STRING,
@@ -48,13 +64,16 @@ module.exports = (sequelize, DataTypes) => {
     });
   
     // Define associations
-    Photo.associate = (models) => {
+    photo.associate = (models) => {
       // A photo belongs to a user
-      Photo.belongsTo(models.User, { foreignKey: 'userId', onDelete: 'CASCADE' });
+      photo.belongsTo(models.user, { foreignKey: 'userId', onDelete: 'CASCADE' });
+  
+      // A photo belongs to a client
+      photo.belongsTo(models.user, { foreignKey: 'clientId', onDelete: 'CASCADE' });
   
       // A photo can have many likes
-      Photo.hasMany(models.Like, { foreignKey: 'photoId', onDelete: 'CASCADE' });
+      photo.hasMany(models.like, { foreignKey: 'photoId', onDelete: 'CASCADE' });
     };
   
-    return Photo;
+    return photo;
   };

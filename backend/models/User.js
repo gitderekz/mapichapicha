@@ -1,6 +1,6 @@
-// models/User.js
+// models/user.js
 module.exports = (sequelize, DataTypes) => {
-    const User = sequelize.define('User', {
+    const user = sequelize.define('user', {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -26,13 +26,13 @@ module.exports = (sequelize, DataTypes) => {
     });
   
     // Define associations
-    User.associate = (models) => {
+    user.associate = (models) => {
       // A user can upload many photos
-      User.hasMany(models.Photo, { foreignKey: 'userId', onDelete: 'CASCADE' });
+      user.hasMany(models.Photo, { foreignKey: 'userId', onDelete: 'CASCADE' });
   
       // A user can like many photos
-      User.hasMany(models.Like, { foreignKey: 'userId', onDelete: 'CASCADE' });
+      user.hasMany(models.Like, { foreignKey: 'userId', onDelete: 'CASCADE' });
     };
   
-    return User;
+    return user;
   };

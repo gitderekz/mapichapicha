@@ -1,6 +1,6 @@
-// models/Like.js
+// models/like.js
 module.exports = (sequelize, DataTypes) => {
-  const Like = sequelize.define('Like', {
+  const like = sequelize.define('like', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -28,13 +28,13 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   // Define associations
-  Like.associate = (models) => {
+  like.associate = (models) => {
     // A like belongs to a user
-    Like.belongsTo(models.User, { foreignKey: 'userId', onDelete: 'CASCADE' });
+    like.belongsTo(models.User, { foreignKey: 'userId', onDelete: 'CASCADE' });
 
     // A like belongs to a photo
-    Like.belongsTo(models.Photo, { foreignKey: 'photoId', onDelete: 'CASCADE' });
+    like.belongsTo(models.Photo, { foreignKey: 'photoId', onDelete: 'CASCADE' });
   };
 
-  return Like;
+  return like;
 };

@@ -1,6 +1,6 @@
-// models/Category.js
+// models/category.js
 module.exports = (sequelize, DataTypes) => {
-    const Category = sequelize.define('Category', {
+    const category = sequelize.define('category', {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -19,10 +19,10 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'categories', // Explicitly set the table name to lowercase
     });
   
-    Category.associate = (models) => {
-      Category.belongsTo(models.Category, { foreignKey: 'parentId', as: 'parent' });
-      Category.hasMany(models.Category, { foreignKey: 'parentId', as: 'children' });
+    category.associate = (models) => {
+      category.belongsTo(models.category, { foreignKey: 'parentId', as: 'parent' });
+      category.hasMany(models.category, { foreignKey: 'parentId', as: 'children' });
     };
   
-    return Category;
+    return category;
   };
