@@ -52,6 +52,7 @@ exports.register = async (req, res) => {
     res.status(201).json({ 
       message: 'User registered', 
       token, 
+      user, 
       role: user.role, 
       userId: user.id 
     });
@@ -78,7 +79,7 @@ exports.login = async (req, res) => {
       }
   
       const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      res.json({ token, role: user.role, userId:user.id });
+      res.json({ token, user, role: user.role, userId:user.id });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: 'Something went wrong' });
