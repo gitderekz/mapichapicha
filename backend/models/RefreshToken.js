@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'user', // Reference the 'user' table
+          model: 'Users', // Reference the 'user' table
           key: 'id',
         },
         onDelete: 'CASCADE', // Delete refresh tokens when the associated user is deleted
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
   
     // Define the association with the User model
     refresh_token.associate = (models) => {
-      refresh_token.belongsTo(models.user, {
+      refresh_token.belongsTo(models.User, {
         foreignKey: 'userId',
         as: 'user',
       });
